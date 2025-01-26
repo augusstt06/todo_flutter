@@ -3,6 +3,7 @@ import 'package:todo_flutter/utils/utils.dart';
 import 'package:gap/gap.dart';
 import 'package:todo_flutter/widgets/custom_container.dart';
 import 'package:todo_flutter/widgets/display_white_text.dart';
+import 'package:todo_flutter/widgets/widgets.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -43,27 +44,11 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    CustomContainer(
-                        height: deviceSize.height * 0.3,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 8,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (context, index) {
-                              return const Text('Home');
-                            })),
+                    DisplayTodoList(todos: const []),
                     const Gap(20),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(20),
-                    CustomContainer(
-                        height: deviceSize.height * 0.25,
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: 8,
-                            padding: EdgeInsets.zero,
-                            itemBuilder: (context, index) {
-                              return const Text('Home');
-                            })),
+                    DisplayTodoList(todos: const []),
                     const Gap(20),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
