@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:todo_flutter/utils/utils.dart';
 import 'package:gap/gap.dart';
-import 'package:todo_flutter/widgets/custom_container.dart';
+import 'package:todo_flutter/data/data.dart';
+import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/display_white_text.dart';
-import 'package:todo_flutter/widgets/widgets.dart';
+import 'package:todo_flutter/widgets/display_todo_list.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -44,7 +44,14 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DisplayTodoList(todos: const []),
+                    DisplayTodoList(todos: const [
+                      Todo(
+                          title: 'title',
+                          description: 'description',
+                          time: '10:12',
+                          date: 'Aug, 07',
+                          isCompleted: false)
+                    ]),
                     const Gap(20),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(20),

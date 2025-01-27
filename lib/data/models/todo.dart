@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
+import 'package:todo_flutter/utils/todo_category.dart';
 
 class Todo extends Equatable {
   final int? id;
@@ -7,7 +8,7 @@ class Todo extends Equatable {
   final String description;
   final String time;
   final String date;
-  // final TodoCategory category;
+  final TodoCategory category;
   final bool isCompleted;
 
   const Todo({
@@ -16,6 +17,7 @@ class Todo extends Equatable {
     required this.description,
     required this.time,
     required this.date,
+    required this.category,
     this.isCompleted = false,
   });
 

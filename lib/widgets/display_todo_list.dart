@@ -27,7 +27,12 @@ class DisplayTodoList extends StatelessWidget {
                 itemCount: todos.length,
                 padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
-                  return const Text('Home');
+                  return Row(children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle, color: Colors.red),
+                        child: Center(child: Icon(Icons.person))),
+                  ]);
                 }));
   }
 }
