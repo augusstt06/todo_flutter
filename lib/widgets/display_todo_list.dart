@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:todo_flutter/data/models/todo.dart';
+
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/custom_container.dart';
 
@@ -25,13 +27,31 @@ class DisplayTodoList extends StatelessWidget {
             : ListView.builder(
                 shrinkWrap: true,
                 itemCount: todos.length,
-                padding: EdgeInsets.zero,
+                padding: EdgeInsets.only(left: 16, top: 10, bottom: 10),
                 itemBuilder: (context, index) {
+                  final todo = todos[index];
                   return Row(children: [
                     Container(
+                        padding: EdgeInsets.all(9.0),
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: Colors.red),
-                        child: Center(child: Icon(Icons.person))),
+                            shape: BoxShape.circle,
+                            color: todo.category.color.withOpacity(0.3),
+                            border: Border.all(
+                                width: 2, color: todo.category.color)),
+                        child: Center(
+                            child: Icon(todo.category.icon,
+                                color: todo.category.color))),
+                    const Gap(16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(todo.title),
+                          Text(todo.time),
+                        ],
+                      ),
+                    ),
+                    Checkbox(value: todo.isCompleted, onChanged: (value) {}),
                   ]);
                 }));
   }

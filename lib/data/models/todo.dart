@@ -18,7 +18,7 @@ class Todo extends Equatable {
     required this.time,
     required this.date,
     required this.category,
-    this.isCompleted = false,
+    required this.isCompleted,
   });
 
   @override
