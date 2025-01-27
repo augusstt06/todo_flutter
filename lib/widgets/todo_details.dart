@@ -26,7 +26,7 @@ class TodoDetails extends StatelessWidget {
             Text(todo.time, style: style.titleMedium),
             const Gap(16),
             Visibility(
-                visible: todo.isCompleted,
+                visible: !todo.isCompleted,
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -35,9 +35,24 @@ class TodoDetails extends StatelessWidget {
                   ],
                 )),
             const Gap(16),
+            Divider(
+              thickness: 1.6,
+              color: todo.category.color,
+            ),
+            const Gap(16),
             Text(todo.description.isEmpty
                 ? 'There is no description for this todo'
-                : todo.description)
+                : todo.description),
+            const Gap(16),
+            Visibility(
+                visible: todo.isCompleted,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text('Todo is Completed'),
+                    Icon(Icons.check_box, color: Colors.green)
+                  ],
+                )),
           ],
         ));
   }
