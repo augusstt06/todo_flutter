@@ -50,8 +50,8 @@ class HomeScreen extends StatelessWidget {
                         description: 'description',
                         time: '10:12',
                         date: 'Aug, 07',
-                        isCompleted: false,
-                        category: TodoCategory.education,
+                        isCompleted: true,
+                        category: TodoCategory.shopping,
                       ),
                       Todo(
                         title: 'title2',
@@ -65,7 +65,24 @@ class HomeScreen extends StatelessWidget {
                     const Gap(20),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(20),
-                    DisplayTodoList(todos: const []),
+                    DisplayTodoList(todos: const [
+                      Todo(
+                        title: 'title',
+                        description: 'description',
+                        time: '10:12',
+                        date: 'Aug, 07',
+                        isCompleted: false,
+                        category: TodoCategory.education,
+                      ),
+                      Todo(
+                        title: 'title2',
+                        description: 'description',
+                        time: '10:12',
+                        date: 'Aug, 08',
+                        isCompleted: false,
+                        category: TodoCategory.home,
+                      )
+                    ]),
                     const Gap(20),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(

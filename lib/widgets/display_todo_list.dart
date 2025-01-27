@@ -3,6 +3,7 @@ import 'package:todo_flutter/data/models/todo.dart';
 
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/custom_container.dart';
+import 'package:todo_flutter/widgets/todo_details.dart';
 import 'package:todo_flutter/widgets/todo_item.dart';
 
 class DisplayTodoList extends StatelessWidget {
@@ -30,7 +31,19 @@ class DisplayTodoList extends StatelessWidget {
                 padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
                   final todo = todos[index];
-                  return TodoItem(todo: todo);
+                  return InkWell(
+                      onLongPress: () {
+                        // delete
+                      },
+                      onTap: () async {
+                        // show details
+                        await showModalBottomSheet(
+                            context: context,
+                            builder: (ctx) {
+                              return TodoDetails(todo: todo);
+                            });
+                      },
+                      child: TodoItem(todo: todo));
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return Divider(
