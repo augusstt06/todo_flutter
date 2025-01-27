@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       Todo(
                         title: 'title2',
-                        description: 'description',
+                        description: '',
                         time: '10:12',
                         date: 'Aug, 08',
                         isCompleted: false,

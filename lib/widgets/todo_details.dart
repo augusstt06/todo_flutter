@@ -33,7 +33,11 @@ class TodoDetails extends StatelessWidget {
                     Text('Todo to be completed on ${todo.date}'),
                     Icon(Icons.check_box, color: todo.category.color)
                   ],
-                ))
+                )),
+            const Gap(16),
+            Text(todo.description.isEmpty
+                ? 'There is no description for this todo'
+                : todo.description)
           ],
         ));
   }
