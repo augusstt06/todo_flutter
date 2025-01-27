@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:todo_flutter/widgets/display_white_text.dart';
+import 'package:go_router/go_router.dart';
+import 'package:todo_flutter/widgets/widgets.dart';
 
 class CreateTodoScreen extends StatelessWidget {
+  static CreateTodoScreen builder(BuildContext context, GoRouterState state) =>
+      const CreateTodoScreen();
   const CreateTodoScreen({super.key});
 
   @override
