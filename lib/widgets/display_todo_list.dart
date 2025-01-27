@@ -13,14 +13,21 @@ class DisplayTodoList extends StatelessWidget {
     final deviceSize = context.deviceSize;
     final height =
         isCompletedTodo ? deviceSize.height * 0.25 : deviceSize.height * 0.3;
+    final emptyTasksMessage =
+        isCompletedTodo ? 'There is no completed todo yet' : 'There is no todo';
+
     return CustomContainer(
         height: height,
-        child: ListView.builder(
-            shrinkWrap: true,
-            itemCount: todos.length,
-            padding: EdgeInsets.zero,
-            itemBuilder: (context, index) {
-              return const Text('Home');
-            }));
+        child: todos.isEmpty
+            ? Center(
+                child: Text(emptyTasksMessage,
+                    style: context.textTheme.headlineSmall))
+            : ListView.builder(
+                shrinkWrap: true,
+                itemCount: todos.length,
+                padding: EdgeInsets.zero,
+                itemBuilder: (context, index) {
+                  return const Text('Home');
+                }));
   }
 }
