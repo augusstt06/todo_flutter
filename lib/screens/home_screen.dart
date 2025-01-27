@@ -52,6 +52,14 @@ class HomeScreen extends StatelessWidget {
                         date: 'Aug, 07',
                         isCompleted: false,
                         category: TodoCategory.education,
+                      ),
+                      Todo(
+                        title: 'title2',
+                        description: 'description',
+                        time: '10:12',
+                        date: 'Aug, 08',
+                        isCompleted: false,
+                        category: TodoCategory.home,
                       )
                     ]),
                     const Gap(20),

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 import 'package:todo_flutter/data/models/todo.dart';
 
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/custom_container.dart';
+import 'package:todo_flutter/widgets/todo_item.dart';
 
 class DisplayTodoList extends StatelessWidget {
   const DisplayTodoList({super.key, required this.todos});
@@ -24,35 +24,19 @@ class DisplayTodoList extends StatelessWidget {
             ? Center(
                 child: Text(emptyTasksMessage,
                     style: context.textTheme.headlineSmall))
-            : ListView.builder(
+            : ListView.separated(
                 shrinkWrap: true,
                 itemCount: todos.length,
-                padding: EdgeInsets.only(left: 16, top: 10, bottom: 10),
+                padding: EdgeInsets.zero,
                 itemBuilder: (context, index) {
                   final todo = todos[index];
-                  return Row(children: [
-                    Container(
-                        padding: EdgeInsets.all(9.0),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: todo.category.color.withOpacity(0.3),
-                            border: Border.all(
-                                width: 2, color: todo.category.color)),
-                        child: Center(
-                            child: Icon(todo.category.icon,
-                                color: todo.category.color))),
-                    const Gap(16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(todo.title),
-                          Text(todo.time),
-                        ],
-                      ),
-                    ),
-                    Checkbox(value: todo.isCompleted, onChanged: (value) {}),
-                  ]);
-                }));
+                  return TodoItem(todo: todo);
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return Divider(
+                    thickness: 1.5,
+                  );
+                },
+              ));
   }
 }
