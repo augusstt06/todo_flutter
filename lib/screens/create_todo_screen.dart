@@ -27,29 +27,7 @@ class CreateTodoScreen extends StatelessWidget {
               children: [
                 CustomTextField(title: 'Todo Title', hintText: 'Title'),
                 const Gap(10),
-                Row(
-                  children: [
-                    Expanded(
-                        child: CustomTextField(
-                            title: 'Date',
-                            hintText: 'Aug , 18',
-                            readOnly: true,
-                            suffixIcon: IconButton(
-                                onPressed: () {},
-                                icon:
-                                    const FaIcon(FontAwesomeIcons.calendar)))),
-                    const Gap(10),
-                    Expanded(
-                        child: CustomTextField(
-                      title: 'Time',
-                      hintText: '10:00',
-                      readOnly: true,
-                      suffixIcon: IconButton(
-                          onPressed: () {},
-                          icon: const FaIcon(FontAwesomeIcons.clock)),
-                    ))
-                  ],
-                ),
+                const SelectDateTime(),
                 const Gap(10),
                 CustomTextField(
                   title: 'Description',
