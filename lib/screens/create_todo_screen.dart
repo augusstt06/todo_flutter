@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
-
+import 'package:todo_flutter/utils/utils.dart';
 import '../widgets/widgets.dart';
 
 class CreateTodoScreen extends StatelessWidget {
@@ -10,6 +11,7 @@ class CreateTodoScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final colors = context.colorScheme;
     return Scaffold(
         appBar: AppBar(
           title: DisplayWhiteText(text: 'Add new todo'),
@@ -18,10 +20,35 @@ class CreateTodoScreen extends StatelessWidget {
             // 스크롤 가능한 위젯의 동작 정의
             // AlwaysScrollableScrollPhysics: 내용이 다 보여도 스크롤 가능
             physics: const AlwaysScrollableScrollPhysics(),
-            padding: EdgeInsets.all(20),
+            padding: const EdgeInsets.all(20),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                CustomTextField(title: 'Todo Title', hintText: 'Title')
+                CustomTextField(title: 'Todo Title', hintText: 'Title'),
+                Gap(10),
+                Row(
+                  children: [
+                    Expanded(
+                        child: CustomTextField(
+                            title: 'Date', hintText: 'Aug , 18')),
+                    Gap(10),
+                    Expanded(
+                        child:
+                            CustomTextField(title: 'Time', hintText: '10:00'))
+                  ],
+                ),
+                Gap(10),
+                CustomTextField(
+                  title: 'Description',
+                  hintText: 'Flutter Practice',
+                  maxLines: 6,
+                ),
+                Gap(50),
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: colors.primary),
+                    onPressed: () {},
+                    child: DisplayWhiteText(text: 'Save'))
               ],
             )));
   }

@@ -7,12 +7,14 @@ class CustomTextField extends StatelessWidget {
       {super.key,
       required this.title,
       required this.hintText,
+      this.maxLines,
       this.controller});
 
   final String title;
   final String hintText;
   final TextEditingController? controller;
 
+  final int? maxLines;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,6 +29,7 @@ class CustomTextField extends StatelessWidget {
           onTapOutside: (e) {
             FocusManager.instance.primaryFocus?.unfocus();
           },
+          maxLines: maxLines,
           decoration: InputDecoration(hintText: hintText),
           onChanged: (value) {},
         )
