@@ -3,6 +3,7 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import '../widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateTodoScreen extends StatelessWidget {
   static CreateTodoScreen builder(BuildContext context, GoRouterState state) =>
@@ -25,25 +26,37 @@ class CreateTodoScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 CustomTextField(title: 'Todo Title', hintText: 'Title'),
-                Gap(10),
+                const Gap(10),
                 Row(
                   children: [
                     Expanded(
                         child: CustomTextField(
-                            title: 'Date', hintText: 'Aug , 18')),
-                    Gap(10),
+                            title: 'Date',
+                            hintText: 'Aug , 18',
+                            readOnly: true,
+                            suffixIcon: IconButton(
+                                onPressed: () {},
+                                icon:
+                                    const FaIcon(FontAwesomeIcons.calendar)))),
+                    const Gap(10),
                     Expanded(
-                        child:
-                            CustomTextField(title: 'Time', hintText: '10:00'))
+                        child: CustomTextField(
+                      title: 'Time',
+                      hintText: '10:00',
+                      readOnly: true,
+                      suffixIcon: IconButton(
+                          onPressed: () {},
+                          icon: const FaIcon(FontAwesomeIcons.clock)),
+                    ))
                   ],
                 ),
-                Gap(10),
+                const Gap(10),
                 CustomTextField(
                   title: 'Description',
                   hintText: 'Flutter Practice',
                   maxLines: 6,
                 ),
-                Gap(50),
+                const Gap(50),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         backgroundColor: colors.primary),
