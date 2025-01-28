@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:todo_flutter/config/routes/routes_location.dart';
 import 'package:todo_flutter/data/data.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/display_todo_list.dart';
@@ -65,9 +66,9 @@ class HomeScreen extends StatelessWidget {
                         category: TodoCategory.home,
                       )
                     ]),
-                    const Gap(20),
+                    const Gap(12),
                     Text('Completed', style: context.textTheme.headlineMedium),
-                    const Gap(20),
+                    const Gap(12),
                     DisplayTodoList(todos: const [
                       Todo(
                         title: 'title',
@@ -86,13 +87,13 @@ class HomeScreen extends StatelessWidget {
                         category: TodoCategory.home,
                       )
                     ]),
-                    const Gap(20),
+                    const Gap(12),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
                             backgroundColor: colors.primary),
-                        onPressed: () {},
+                        onPressed: () => context.push(RouteLocation.createTodo),
                         child: const Padding(
-                            padding: EdgeInsets.all(8.0),
+                            padding: EdgeInsets.all(5.0),
                             child: DisplayWhiteText(text: 'Add Todo')))
                   ],
                 )))
