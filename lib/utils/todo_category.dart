@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// enum을 사용해 todo 카테고리 정의.
 enum TodoCategory {
   education(Icons.school, Colors.blueGrey),
   health(Icons.favorite, Colors.orange),
