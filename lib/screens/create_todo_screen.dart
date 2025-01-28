@@ -3,7 +3,6 @@ import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import '../widgets/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class CreateTodoScreen extends StatelessWidget {
   static CreateTodoScreen builder(BuildContext context, GoRouterState state) =>

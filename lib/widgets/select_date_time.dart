@@ -17,7 +17,7 @@ class SelectDateTime extends StatelessWidget {
                 hintText: 'Aug , 18',
                 readOnly: true,
                 suffixIcon: IconButton(
-                    onPressed: () {},
+                    onPressed: () => _selectDate(context),
                     icon: const FaIcon(FontAwesomeIcons.calendar)))),
         const Gap(10),
         Expanded(
@@ -26,9 +26,30 @@ class SelectDateTime extends StatelessWidget {
           hintText: '10:00',
           readOnly: true,
           suffixIcon: IconButton(
-              onPressed: () {}, icon: const FaIcon(FontAwesomeIcons.clock)),
+              onPressed: () => _selectTime(context),
+              icon: const FaIcon(FontAwesomeIcons.clock)),
         ))
       ],
     );
+  }
+
+  // 시계 위젯을 띄워서 시간을 선택하는 함수
+  void _selectTime(BuildContext context) async {
+    TimeOfDay? selectedTime =
+        await showTimePicker(context: context, initialTime: TimeOfDay.now());
+    if (selectedTime != null) {
+      //
+    }
+  }
+
+  void _selectDate(BuildContext context) async {
+    DateTime? selectedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(2025),
+        lastDate: DateTime(2050));
+    if (selectedDate != null) {
+      //
+    }
   }
 }
