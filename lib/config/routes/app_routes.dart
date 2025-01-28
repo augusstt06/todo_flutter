@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:todo_flutter/config/routes/routes_location.dart';
 import 'package:todo_flutter/screens/screens.dart';
 
-// app 내의 내비게이션 상태를 관리하는데 사용되는 키.
+// 경로 구조 및 네비게이션 관리
 final navigationKey = GlobalKey<NavigatorState>();
 
 final appRoutes = [
