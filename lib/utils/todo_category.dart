@@ -12,6 +12,15 @@ enum TodoCategory {
   travel(Icons.flight, Colors.deepOrange),
   work(Icons.work, Colors.amber);
 
+  static TodoCategory stringToCategory(String name) {
+    try {
+      return TodoCategory.values
+          .firstWhere((category) => category.name == name);
+    } catch (e) {
+      return TodoCategory.others;
+    }
+  }
+
   final IconData icon;
   final Color color;
   const TodoCategory(this.icon, this.color);

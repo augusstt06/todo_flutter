@@ -1,6 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
+
 import 'package:todo_flutter/utils/todo_category.dart';
+import 'package:todo_flutter/utils/utils.dart';
 
 class Todo extends Equatable {
   final int? id;
@@ -53,5 +57,29 @@ class Todo extends Equatable {
       date,
       isCompleted,
     ];
+  }
+
+  Map<String, dynamic> toJson() {
+    return <String, dynamic>{
+      TodoKeys.id: id,
+      TodoKeys.title: title,
+      TodoKeys.description: description,
+      TodoKeys.time: time,
+      TodoKeys.date: date,
+      TodoKeys.category: category.name,
+      TodoKeys.isCompleted: isCompleted,
+    };
+  }
+
+  factory Todo.fromJson(Map<String, dynamic> map) {
+    return Todo(
+      id: map[TodoKeys.id],
+      title: map[TodoKeys.title],
+      description: map[TodoKeys.description],
+      time: map[TodoKeys.time],
+      date: map[TodoKeys.date],
+      category: TodoCategory.stringToCategory(map[TodoKeys.category]),
+      isCompleted: map[TodoKeys.isCompleted],
+    );
   }
 }
