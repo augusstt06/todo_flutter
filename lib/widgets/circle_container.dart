@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CircleContainer extends StatelessWidget {
-  const CircleContainer({super.key, required this.child, required this.color});
+  const CircleContainer({super.key, this.child, required this.color});
   final Color color;
   final Widget? child;
 
@@ -13,6 +13,6 @@ class CircleContainer extends StatelessWidget {
             shape: BoxShape.circle,
             color: color,
             border: Border.all(width: 2, color: color)),
-        child: Center(child: child));
+        child: Center(child: child ?? const SizedBox.shrink()));
   }
 }
