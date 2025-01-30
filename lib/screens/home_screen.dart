@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_flutter/config/routes/routes_location.dart';
 import 'package:todo_flutter/data/data.dart';
+import 'package:todo_flutter/providers/todo/todo_provider.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/display_todo_list.dart';
 import 'package:todo_flutter/widgets/display_white_text.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends ConsumerWidget {
   static HomeScreen builder(BuildContext context, GoRouterState state) =>
       const HomeScreen();
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     final colors = context.colorScheme;
     final deviceSize = context.deviceSize;
+    final todoState = ref.watch(todoProvider);
+
     return Scaffold(
         body: Stack(
       children: [
@@ -48,24 +52,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DisplayTodoList(todos: [
-                      Todo(
-                        title: 'title',
-                        description: 'description',
-                        time: '10:12',
-                        date: 'Aug, 07',
-                        isCompleted: true,
-                        category: TodoCategory.shopping,
-                      ),
-                      Todo(
-                        title: 'title2',
-                        description: '',
-                        time: '10:12',
-                        date: 'Aug, 08',
-                        isCompleted: false,
-                        category: TodoCategory.home,
-                      )
-                    ]),
+                    DisplayTodoList(todos: todoState.todos),
                     const Gap(12),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(12),
