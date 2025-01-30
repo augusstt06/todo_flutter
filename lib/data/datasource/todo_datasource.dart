@@ -38,7 +38,7 @@ class TodoDataSource {
     ''');
   }
 
-  Future<int> addTodo(Todo todo) async {
+  Future<int> createTodo(Todo todo) async {
     final db = await database;
     return db.transaction((action) async {
       return await action.insert(DBKeys.dbTable, todo.toJson(),
