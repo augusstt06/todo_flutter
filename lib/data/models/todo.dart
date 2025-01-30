@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:convert';
-
 import 'package:equatable/equatable.dart';
 
 import 'package:todo_flutter/utils/todo_category.dart';
@@ -80,6 +77,26 @@ class Todo extends Equatable {
       date: map[TodoKeys.date],
       category: TodoCategory.stringToCategory(map[TodoKeys.category]),
       isCompleted: map[TodoKeys.isCompleted],
+    );
+  }
+
+  Todo copyWith({
+    int? id,
+    String? title,
+    String? description,
+    String? time,
+    String? date,
+    TodoCategory? category,
+    bool? isCompleted,
+  }) {
+    return Todo(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      description: description ?? this.description,
+      time: time ?? this.time,
+      date: date ?? this.date,
+      category: category ?? this.category,
+      isCompleted: isCompleted ?? this.isCompleted,
     );
   }
 }
