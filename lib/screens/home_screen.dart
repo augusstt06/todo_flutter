@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_flutter/config/routes/routes_location.dart';
+import 'package:todo_flutter/data/data.dart';
 import 'package:todo_flutter/providers/todo/todo_provider.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/display_todo_list.dart';
@@ -51,12 +52,13 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DisplayTodoList(todos: todoState.todos),
+                    DisplayTodoList(todos: _incompleteTodos(todoState.todos)),
                     const Gap(12),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(12),
                     DisplayTodoList(
-                        todos: todoState.todos, isCompletedTodo: true),
+                        todos: _completedTodos(todoState.todos),
+                        isCompletedTodo: true),
                     const Gap(12),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -69,5 +71,19 @@ class HomeScreen extends ConsumerWidget {
                 )))
       ],
     ));
+  }
+
+  List<Todo> _completedTodos(List<Todo> todos) {
+    final List<Todo> filteredTodos =
+        todos.where((todo) => todo.isCompleted).toList();
+
+    return filteredTodos;
+  }
+
+  List<Todo> _incompleteTodos(List<Todo> todos) {
+    final List<Todo> filteredTodos =
+        todos.where((todo) => !todo.isCompleted).toList();
+
+    return filteredTodos;
   }
 }
