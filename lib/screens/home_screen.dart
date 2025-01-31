@@ -21,8 +21,8 @@ class HomeScreen extends ConsumerWidget {
     final colors = context.colorScheme;
     final deviceSize = context.deviceSize;
     final todoState = ref.watch(todoProvider);
-    final completedTodos = _completedTodos(todoState.todos);
-    final incompleteTodos = _incompleteTodos(todoState.todos);
+    final completedTodos = _completedTodos(todoState.todos, ref);
+    final incompleteTodos = _incompleteTodos(todoState.todos, ref);
     final selectedDate = ref.watch(dateProvider);
 
     return Scaffold(
@@ -80,16 +80,29 @@ class HomeScreen extends ConsumerWidget {
     ));
   }
 
-  List<Todo> _completedTodos(List<Todo> todos) {
-    final List<Todo> filteredTodos =
-        todos.where((todo) => todo.isCompleted).toList();
-
-    return filteredTodos;
+  List<Todo> _completedTodos(List<Todo> todos, WidgetRef ref) {
+    final selectedDate = ref.watch(dateProvider);
+    final List<Todo> filterdTodos = [];
+    for (var todo in todos) {
+      final isTodoDay =
+          TimeDateUtils.isTodoFromSelectedDate(todo, selectedDate);
+      if (isTodoDay && todo.isCompleted) {
+        filterdTodos.add(todo);
+      }
+    }
+    return filterdTodos;
   }
 
-  List<Todo> _incompleteTodos(List<Todo> todos) {
-    final List<Todo> filteredTodos =
-        todos.where((todo) => !todo.isCompleted).toList();
+  List<Todo> _incompleteTodos(List<Todo> todos, WidgetRef ref) {
+    final selectedDate = ref.watch(dateProvider);
+    final List<Todo> filteredTodos = [];
+    for (var todo in todos) {
+      final isTodoDay =
+          TimeDateUtils.isTodoFromSelectedDate(todo, selectedDate);
+      if (isTodoDay && !todo.isCompleted) {
+        filteredTodos.add(todo);
+      }
+    }
 
     return filteredTodos;
   }
