@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:todo_flutter/data/models/todo.dart';
+import 'package:todo_flutter/providers/todo/todo.dart';
 import 'package:todo_flutter/utils/app_alerts.dart';
 
 import 'package:todo_flutter/utils/utils.dart';
@@ -45,7 +46,21 @@ class DisplayTodoList extends ConsumerWidget {
                               return TodoDetails(todo: todo);
                             });
                       },
-                      child: TodoItem(todo: todo));
+                      child: TodoItem(
+                        todo: todo,
+                        onCompleted: (value) async {
+                          await ref
+                              .read(todoProvider.notifier)
+                              .updateTodo(todo)
+                              .then((value) {
+                            AppAlerts.displaySnackBar(
+                                context,
+                                todo.isCompleted
+                                    ? 'Todo incompleted'
+                                    : 'Todo completed');
+                          });
+                        },
+                      ));
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return Divider(
