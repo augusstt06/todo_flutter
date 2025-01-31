@@ -19,6 +19,8 @@ class HomeScreen extends ConsumerWidget {
     final colors = context.colorScheme;
     final deviceSize = context.deviceSize;
     final todoState = ref.watch(todoProvider);
+    final completedTodos = _completedTodos(todoState.todos);
+    final incompleteTodos = _incompleteTodos(todoState.todos);
 
     return Scaffold(
         body: Stack(
@@ -52,13 +54,12 @@ class HomeScreen extends ConsumerWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
-                    DisplayTodoList(todos: _incompleteTodos(todoState.todos)),
+                    DisplayTodoList(todos: incompleteTodos),
                     const Gap(12),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(12),
                     DisplayTodoList(
-                        todos: _completedTodos(todoState.todos),
-                        isCompletedTodo: true),
+                        todos: completedTodos, isCompletedTodo: true),
                     const Gap(12),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(
