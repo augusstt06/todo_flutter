@@ -2,7 +2,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
+import 'package:todo_flutter/config/routes/routes.dart';
+import 'package:todo_flutter/data/data.dart';
+
 import 'package:todo_flutter/utils/utils.dart';
+import '../providers/providers.dart';
 import '../widgets/widgets.dart';
 
 class CreateTodoScreen extends ConsumerStatefulWidget {
@@ -74,9 +79,22 @@ class _CreateTodoScreenState extends ConsumerState<CreateTodoScreen> {
   void _createTodo() async {
     final title = _titleController.text.trim();
     final description = _descriptionController.text.trim();
+    final date = ref.watch(dateProvider);
+    final time = ref.watch(timeProvider);
+    final category = ref.watch(categoryProvider);
 
-    if (title.isEmpty) {
-      print('Title is required');
+    if (title.isNotEmpty) {
+      final todo = Todo(
+          title: title,
+          description: description,
+          time: Convert.timeToString(time),
+          date: DateFormat.yMMMd().format(date),
+          category: category,
+          isCompleted: false);
+      await ref.read(todoRepositoryProvider).createTodo(todo);
+      if (mounted) {
+        context.go(RouteLocation.home);
+      }
     }
   }
 }

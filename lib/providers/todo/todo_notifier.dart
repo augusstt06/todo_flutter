@@ -6,11 +6,15 @@ import 'package:todo_flutter/providers/providers.dart';
 
 class TodoNotifier extends StateNotifier<TodoState> {
   final TodoRepository _repository;
-  TodoNotifier(this._repository) : super(const TodoState.initial());
+  TodoNotifier(this._repository) : super(const TodoState.initial()) {
+    getTodo();
+  }
 
   Future<void> createTodo(Todo todo) async {
     try {
-      await _repository.createTodo(todo);
+      await _repository.createTodo(todo).then((value) {
+        getTodo();
+      });
     } catch (err) {
       debugPrint(err.toString());
     }
@@ -20,7 +24,9 @@ class TodoNotifier extends StateNotifier<TodoState> {
     try {
       final isCompleted = !todo.isCompleted;
       final updatedTodo = todo.copyWith(isCompleted: isCompleted);
-      await _repository.updateTodo(updatedTodo);
+      await _repository.updateTodo(updatedTodo).then((value) {
+        getTodo();
+      });
     } catch (err) {
       debugPrint(err.toString());
     }
@@ -28,13 +34,15 @@ class TodoNotifier extends StateNotifier<TodoState> {
 
   Future<void> deleteTodo(Todo todo) async {
     try {
-      await _repository.deleteTodo(todo);
+      await _repository.deleteTodo(todo).then((value) {
+        getTodo();
+      });
     } catch (err) {
       debugPrint(err.toString());
     }
   }
 
-  Future<void> getAllTodos() async {
+  void getTodo() async {
     try {
       final todos = await _repository.getAllTodos();
       state = state.copyWith(todos: todos);
