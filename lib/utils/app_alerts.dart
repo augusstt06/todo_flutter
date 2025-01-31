@@ -24,9 +24,11 @@ class AppAlerts {
     Widget cancelButton =
         TextButton(onPressed: () => context.pop(), child: const Text('No'));
     Widget deleteButton = TextButton(
-        onPressed: () {
-          ref.read(todoProvider.notifier).deleteTodo(todo);
-          context.pop();
+        onPressed: () async {
+          await ref.read(todoProvider.notifier).deleteTodo(todo).then((value) {
+            AppAlerts.displaySnackBar(context, 'Todo deleted successfully');
+            context.pop();
+          });
         },
         child: const Text('Yes'));
     AlertDialog alert = AlertDialog(
