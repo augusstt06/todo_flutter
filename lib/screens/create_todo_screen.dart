@@ -5,6 +5,7 @@ import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_flutter/config/routes/routes.dart';
 import 'package:todo_flutter/data/data.dart';
+import 'package:todo_flutter/utils/app_alerts.dart';
 
 import 'package:todo_flutter/utils/utils.dart';
 import '../providers/providers.dart';
@@ -92,9 +93,12 @@ class _CreateTodoScreenState extends ConsumerState<CreateTodoScreen> {
           category: category,
           isCompleted: false);
       await ref.read(todoProvider.notifier).createTodo(todo);
-      if (mounted) {
-        context.go(RouteLocation.home);
-      }
+      // if (mounted) {
+      AppAlerts.displaySnackBar(context, 'Todo created Successfully!');
+      context.go(RouteLocation.home);
+      // }
+    } else {
+      AppAlerts.displaySnackBar(context, 'Todo creation failed!');
     }
   }
 }
