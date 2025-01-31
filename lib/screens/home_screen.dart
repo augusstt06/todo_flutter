@@ -3,7 +3,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
 import 'package:todo_flutter/config/routes/routes_location.dart';
-import 'package:todo_flutter/data/data.dart';
 import 'package:todo_flutter/providers/todo/todo_provider.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/display_todo_list.dart';
@@ -56,24 +55,8 @@ class HomeScreen extends ConsumerWidget {
                     const Gap(12),
                     Text('Completed', style: context.textTheme.headlineMedium),
                     const Gap(12),
-                    DisplayTodoList(todos: const [
-                      Todo(
-                        title: 'title',
-                        description: 'description',
-                        time: '10:12',
-                        date: 'Aug, 07',
-                        isCompleted: false,
-                        category: TodoCategory.education,
-                      ),
-                      Todo(
-                        title: 'title2',
-                        description: 'description',
-                        time: '10:12',
-                        date: 'Aug, 08',
-                        isCompleted: false,
-                        category: TodoCategory.home,
-                      )
-                    ]),
+                    DisplayTodoList(
+                        todos: todoState.todos, isCompletedTodo: true),
                     const Gap(12),
                     ElevatedButton(
                         style: ElevatedButton.styleFrom(

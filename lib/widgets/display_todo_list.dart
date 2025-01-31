@@ -7,9 +7,10 @@ import 'package:todo_flutter/widgets/todo_details.dart';
 import 'package:todo_flutter/widgets/todo_item.dart';
 
 class DisplayTodoList extends StatelessWidget {
-  const DisplayTodoList({super.key, required this.todos});
+  const DisplayTodoList(
+      {super.key, required this.todos, this.isCompletedTodo = false});
   final List<Todo> todos;
-  final bool isCompletedTodo = false;
+  final bool isCompletedTodo;
 
   @override
   Widget build(BuildContext context) {
