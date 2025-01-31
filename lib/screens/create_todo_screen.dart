@@ -91,7 +91,7 @@ class _CreateTodoScreenState extends ConsumerState<CreateTodoScreen> {
           date: DateFormat.yMMMd().format(date),
           category: category,
           isCompleted: false);
-      await ref.read(todoRepositoryProvider).createTodo(todo);
+      await ref.read(todoProvider.notifier).createTodo(todo);
       if (mounted) {
         context.go(RouteLocation.home);
       }
