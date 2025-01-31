@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:go_router/go_router.dart';
+import 'package:intl/intl.dart';
 import 'package:todo_flutter/config/routes/routes_location.dart';
 import 'package:todo_flutter/data/data.dart';
-import 'package:todo_flutter/providers/todo/todo_provider.dart';
 import 'package:todo_flutter/utils/utils.dart';
 import 'package:todo_flutter/widgets/display_todo_list.dart';
 import 'package:todo_flutter/widgets/display_white_text.dart';
+
+import '../providers/providers.dart';
 
 class HomeScreen extends ConsumerWidget {
   static HomeScreen builder(BuildContext context, GoRouterState state) =>
@@ -21,6 +23,7 @@ class HomeScreen extends ConsumerWidget {
     final todoState = ref.watch(todoProvider);
     final completedTodos = _completedTodos(todoState.todos);
     final incompleteTodos = _incompleteTodos(todoState.todos);
+    final selectedDate = ref.watch(dateProvider);
 
     return Scaffold(
         body: Stack(
@@ -31,14 +34,17 @@ class HomeScreen extends ConsumerWidget {
                 height: deviceSize.height * 0.3,
                 width: deviceSize.width,
                 color: colors.primary,
-                child: const Center(
+                child: Center(
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        DisplayWhiteText(
-                            text: 'Aug 18, 1995',
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal),
+                        InkWell(
+                          onTap: () => TimeDateUtils.selectDate(context, ref),
+                          child: DisplayWhiteText(
+                              text: DateFormat.yMMMd().format(selectedDate),
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal),
+                        ),
                         DisplayWhiteText(text: 'Todolist', fontSize: 40)
                       ]),
                 )),

@@ -88,7 +88,7 @@ class _CreateTodoScreenState extends ConsumerState<CreateTodoScreen> {
       final todo = Todo(
           title: title,
           description: description,
-          time: Convert.timeToString(time),
+          time: TimeDateUtils.timeToString(time),
           date: DateFormat.yMMMd().format(date),
           category: category,
           isCompleted: false);

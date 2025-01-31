@@ -5,7 +5,7 @@ import 'package:gap/gap.dart';
 import 'package:todo_flutter/providers/date_provider.dart';
 import 'package:intl/intl.dart';
 import 'package:todo_flutter/providers/time_provider.dart';
-import 'package:todo_flutter/utils/convert.dart';
+import 'package:todo_flutter/utils/time_date_utils.dart';
 import 'widgets.dart';
 
 class SelectDateTime extends ConsumerWidget {
@@ -23,13 +23,13 @@ class SelectDateTime extends ConsumerWidget {
                 hintText: DateFormat.yMMMd().format(date),
                 readOnly: true,
                 suffixIcon: IconButton(
-                    onPressed: () => _selectDate(context, ref),
+                    onPressed: () => TimeDateUtils.selectDate(context, ref),
                     icon: const FaIcon(FontAwesomeIcons.calendar)))),
         const Gap(10),
         Expanded(
             child: CustomTextField(
           title: 'Time',
-          hintText: Convert.timeToString(time),
+          hintText: TimeDateUtils.timeToString(time),
           readOnly: true,
           suffixIcon: IconButton(
               onPressed: () => _selectTime(context, ref),
@@ -46,18 +46,6 @@ class SelectDateTime extends ConsumerWidget {
         await showTimePicker(context: context, initialTime: initialTime);
     if (selectedTime != null) {
       ref.read(timeProvider.notifier).state = selectedTime;
-    }
-  }
-
-  void _selectDate(BuildContext context, WidgetRef ref) async {
-    final initialDate = ref.read(dateProvider);
-    DateTime? selectedDate = await showDatePicker(
-        context: context,
-        initialDate: initialDate,
-        firstDate: DateTime(2025),
-        lastDate: DateTime(2050));
-    if (selectedDate != null) {
-      ref.read(dateProvider.notifier).state = selectedDate;
     }
   }
 }
